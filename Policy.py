@@ -44,11 +44,13 @@ class Policy(nn.Module):
         # Store the mutation parameters
         self.mutation_rate  = self.config_data['Policy']['mutation_rate']
         self.mutation_scale = self.config_data['Policy']['mutation_scale']
+        self.weight_init_lim = self.config_data['Policy']['weight_init_lim']
+        self.bias_init_lim = self.config_data['Policy']['bias_init_lim']
 
     def reset_parameters(self):
         for layer in self.layers:
-            nn.init.uniform_(layer.weight, -0.1, 0.1)
-            nn.init.uniform_(layer.bias, -0.1, 0.1)
+            nn.init.uniform_(layer.weight, -self.weight_init_lim, self.weight_init_lim)
+            nn.init.uniform_(layer.bias, -self.bias_init_lim, self.bias_init_lim)
 
     def forward(self, x):
         """
