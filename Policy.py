@@ -34,7 +34,7 @@ class Policy(nn.Module):
         """Read and load Policy configuration from the YAML file."""
         with open(self.config_filename, 'r') as config_file:
             self.config_data = yaml.safe_load(config_file)
-            print('[Policy]: YAML config read.')
+            # print('[Policy]: YAML config read.')
 
         self._load_config()
     

@@ -4,5 +4,5 @@ Policy:
   mutation_scale: 0.2
 
 Evolutionary:
-  pop_size: 3
+  pop_size: 10
   num_gens: 10
