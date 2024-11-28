@@ -19,6 +19,8 @@ class Individual:
         self.id = id
         self.num_objs = num_objs
 
+        self.trajectory = None
+
         self.reset_fitness()
     
     def reset_fitness(self):
@@ -29,3 +31,11 @@ class Individual:
         """Mutate each policy in the joint policy"""
         for p in self.joint_policy:
             p.mutate()
+    
+    def __str__(self):
+        """Define the string representation of the Individual."""
+        return f"Individual(id={self.id}, fitness={self.fitness})"
+    
+    def __repr__(self):
+        """Define the representation of the Individual."""
+        return self.__str__()
