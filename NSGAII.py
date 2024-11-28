@@ -47,15 +47,20 @@ class NSGAII:
             trajectory, fitness_dict = self.interface.rollout(ind.joint_policy)
             if len(fitness_dict) != self.num_objs:
                 raise ValueError(f"[NSGA-II] Expected {self.num_objs} objectives, but got {len(fitness_dict)}.")
+            # Store the rollout trajectory
+            ind.trajectory = trajectory
             # Store fitness
             for f in fitness_dict:
                 ind.fitness[f] = -fitness_dict[f] # NOTE: The fitness sign is flipped to match Pygmo convention
         
         # Sort the population according to fitness
         sorted_indices = pg.sort_population_mo(points=[ind.fitness for ind in self.pop])
+        # print(sorted_indices)
+        for i in sorted_indices:
+            print(self.pop[i])
+        print("----------------------------")
         # Save only the top half of the population
         sorted_indices = sorted_indices[:len(sorted_indices)//2]
-        print(sorted_indices)
 
         # Save these elites into the parent set
         parent_set = [self.pop[elite_idx] for elite_idx in sorted_indices]
@@ -85,5 +90,5 @@ class NSGAII:
 
 nsga = NSGAII()
 
-for _ in range(10):
+for _ in range(10000):
     nsga.evolve()
