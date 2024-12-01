@@ -80,6 +80,7 @@ class MORoverInterface():
                     {
                         'state' : agent_observation,
                         'action' : action,
+                        'position': agent_locations[i],  # Store the actual position
                     }
                 )
 
@@ -94,6 +95,21 @@ class MORoverInterface():
 
         return rollout_trajectory, cumulative_global_reward
 
+    # Function that evaluates a given trajectory for global rewards (without rollout)
+    def evaluate_trajectory(self, traj: dict):
+        parsed_trajectory = [
+            [agent['position'] for agent in timestep]
+            for timestep in zip(*traj)
+        ] # NOTE: this only works for 2-dimensional environments
+
+        self.rover_env.reset() # reset the rover env
+
+        cumulative_global_reward = {}  # Initialize cumulative global reward
+        for t, agent_locations in enumerate(parsed_trajectory):
+            global_reward = self.rover_env.get_global_rewards(rov_locations=agent_locations, timestep=t)
+            cumulative_global_reward = self._keywise_sum(cumulative_global_reward, global_reward)
+        
+        return cumulative_global_reward
 
     # Function to get domain-specific information for the algorithm
     def get_state_size(self):
