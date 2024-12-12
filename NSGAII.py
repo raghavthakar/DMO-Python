@@ -87,6 +87,8 @@ class NSGAII:
         self.pop = parent_set
         self.pop.extend(offspring_set)
 
+        random.shuffle(self.pop) # NOTE: This is so that equally dominnat offpsrings in later indices don't just get thrown out
+
 
 nsga = NSGAII()
 
