@@ -28,7 +28,7 @@ class KParentNSGAII:
                                           id=1, 
                                           num_objs=self.num_objs) for _ in range(self.pop_size)]
         
-        self.utils = Utils.Utils()
+        self.utils = Utils.Utils(num_objs=self.num_objs)
         
     def _read_config(self):
         """Read and load NSGA-II configuration from the YAML file."""
