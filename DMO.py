@@ -14,10 +14,10 @@ numpy.random.seed(2024)
 
 class DMO:
     def __init__(self):
-        self.config_filename = '/home/raghav/Research/GECCO25/DMO/config/DMOConfig.yaml'
+        self.config_filename = '/home/thakarr/DMO/DMO-Python/config/DMOConfig.yaml'
         self._read_config()
 
-        self.interface = MORoverInterface.MORoverInterface('/home/raghav/Research/GECCO25/DMO/config/MORoverEnvConfig.yaml')
+        self.interface = MORoverInterface.MORoverInterface('/home/thakarr/DMO/DMO-Python/config/MORoverEnvConfig.yaml')
         self.team_size = self.interface.get_team_size()
         self.num_objs = self.interface.get_num_objs()
 
@@ -139,6 +139,8 @@ class DMO:
         # Set the population to the parent + offspring set
         self.pop = parent_set
         self.pop.extend(offspring_set)
+
+        random.shuffle(self.pop) # NOTE: This is so that equally dominnat offpsrings in later indices don't just get thrown out
 
 
 nsga = DMO()
