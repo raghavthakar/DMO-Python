@@ -123,6 +123,7 @@ class MORoverEnv:
         self.observation_mode = self.config_data['Environment']['observation_mode']
         self.poi_obs_temp = self.config_data['Environment']['poi_obs_temp'] # Temp for state info of the pois -> e^-x/temp
         self.agent_obs_temp = self.config_data['Environment']['agent_obs_temp'] # Temp for state info of the agents -> e^-x/temp
+        self.include_location_in_obs = self.config_data['Environment']['include_location_in_obs']
 
         # Initialize POIs and store initial configuration
         self.pois = [POI(**poi) for poi in self.config_data['Environment']['pois']]
@@ -244,7 +245,7 @@ class MORoverEnv:
             new_location = []
             for i, (coord, delta_i, max_dim) in enumerate(zip(loc, delta, self.dimensions)):
                 updated_coord = coord + delta_i
-                updated_coord = max(0, min(updated_coord, max_dim - 1))  # Enforce boundaries
+                updated_coord = max(0, min(updated_coord, max_dim))  # Enforce boundaries
                 new_location.append(updated_coord)
 
             updated_locations.append(new_location)
@@ -263,7 +264,7 @@ class MORoverEnv:
 
         Returns:
         - observations_list (list): List of observations for each rover.
-          Each observation is a list containing the rover's position followed by counts of POIs and agents.
+          Each observation is a list containing the (OPTIONAL: rover's position followed by) counts/densities of POIs and agents.
         """
         if not (isinstance(rover_locations, list) and isinstance(num_sensors_list, list) and isinstance(observation_radius_list, list)):
             raise ValueError("rover_locations, num_sensors_list, and observation_radius_list must all be lists.")
@@ -283,11 +284,13 @@ class MORoverEnv:
 
             observation = []
 
-            # Choose to normalise or not and add the agent location 
-            if not normalise:
-                observation.extend(rover_pos)
-            else:
-                observation.extend(np.divide(rover_pos, self.dimensions))
+            # Whether to include agent's location in observations
+            if self.include_location_in_obs:
+                # Choose to normalise or not and add the agent location 
+                if not normalise:
+                    observation.extend(rover_pos)
+                else:
+                    observation.extend(np.divide(rover_pos, self.dimensions))
 
             # Initialize observations
             if num_dimensions == 1:
