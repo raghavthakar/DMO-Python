@@ -4,7 +4,7 @@ import pygmo as pg
 import Algorithm
 
 class NSGAII(Algorithm.Algorithm):
-    def evolve(self):
+    def evolve(self, gen=0):
         """Evolve the population using NSGA-II."""
         # Perform rollout and assign fitness to each individual
         for ind in self.pop:
@@ -59,5 +59,5 @@ class NSGAII(Algorithm.Algorithm):
 
 nsga = NSGAII()
 
-for _ in range(10000):
-    nsga.evolve()
+for i in range(10000):
+    nsga.evolve(i)

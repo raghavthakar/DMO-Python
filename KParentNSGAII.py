@@ -5,7 +5,7 @@ import Algorithm
 import Individual
 
 class KParentNSGAII(Algorithm.Algorithm):
-    def evolve(self):
+    def evolve(self, gen=0):
         """Evolve the population using NSGA-II."""
         # Perform rollout and assign fitness to each individual
         for ind in self.pop:
@@ -83,4 +83,4 @@ nsga = KParentNSGAII()
 
 for i in range(1000):
     print("Generation:", i)
-    nsga.evolve()
+    nsga.evolve(i)

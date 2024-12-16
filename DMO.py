@@ -6,7 +6,7 @@ import Algorithm
 import Individual
 
 class DMO(Algorithm.Algorithm):
-    def evolve(self):
+    def evolve(self, gen=0):
         """Evolve the population using NSGA-II."""
         # Perform rollout and assign fitness to each individual
         for ind in self.pop:
@@ -21,6 +21,13 @@ class DMO(Algorithm.Algorithm):
             # Store fitness
             for f in fitness_dict:
                 ind.fitness[f] = -fitness_dict[f] # NOTE: The fitness sign is flipped to match Pygmo convention
+            
+            # Add this individual's data to the logger
+            self.data_logger.add_data(key='gen', value=1)
+            self.data_logger.add_data(key='id', value=-1)
+            self.data_logger.add_data(key='fitness', value=ind.fitness)
+            self.data_logger.add_data(key='trajectory', value=ind.trajectory)
+            self.data_logger.write_data()
 
         # Sort the population according to fitness
         sorted_indices = pg.sort_population_mo(points=[ind.fitness for ind in self.pop])
@@ -110,4 +117,4 @@ nsga = DMO()
 
 for i in range(1000):
     print("Generation:", i)
-    nsga.evolve()
+    nsga.evolve(i)
