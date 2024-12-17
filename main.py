@@ -48,3 +48,7 @@ if __name__ == '__main__':
         alg = DMO.DMO(alg_config_filename=dest_alg_config_filename,
                       data_filename=data_filename,
                       rover_config_filename=dest_env_config_filename)
+    
+    # Run the algorithm
+    for gen in range(alg.num_gens):
+        alg.evolve(gen=gen)
