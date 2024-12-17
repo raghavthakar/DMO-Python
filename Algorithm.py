@@ -26,13 +26,22 @@ class Algorithm:
         self.team_size = self.interface.get_team_size()
         self.num_objs = self.interface.get_num_objs()
 
-        self.pop = [Individual.Individual(config_filename=self.config_filename, 
-                                          num_agents=self.team_size, 
-                                          input_size=self.interface.get_state_size(), 
-                                          output_size=self.interface.get_action_size(), 
-                                          id=1, 
-                                          num_objs=self.num_objs) for _ in range(self.pop_size)]
+        self.pop = []
+        self.glob_ind_counter = 0
         
+        # Create the initial population
+        for i in range(self.pop_size):
+            # Add new individual ot the population
+            self.pop.append(Individual.Individual(config_filename=self.config_filename,
+                                                  num_agents=self.team_size,
+                                                  input_size=self.interface.get_state_size(),
+                                                  output_size=self.interface.get_action_size(),
+                                                  id=i,
+                                                  num_objs=self.num_objs))
+            # Increment the global id counter
+            self.glob_ind_counter += 1
+        
+        # Evo utils
         self.utils = Utils.Utils(num_objs=self.num_objs)
         
     def _read_config(self):
