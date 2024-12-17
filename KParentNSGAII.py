@@ -5,6 +5,9 @@ import Algorithm
 import Individual
 
 class KParentNSGAII(Algorithm.Algorithm):
+    def __init__(self, alg_config_filename, rover_config_filename, data_filename):
+        super().__init__(alg_config_filename, rover_config_filename, data_filename)
+    
     def evolve(self, gen=0):
         """Evolve the population using NSGA-II."""
         # Perform rollout and assign fitness to each individual
@@ -84,10 +87,3 @@ class KParentNSGAII(Algorithm.Algorithm):
         self.pop.extend(offspring_set)
 
         random.shuffle(self.pop) # NOTE: This is so that equally dominnat offpsrings in later indices don't just get thrown out
-
-
-nsga = KParentNSGAII()
-
-for i in range(1000):
-    print("Generation:", i)
-    nsga.evolve(i)
