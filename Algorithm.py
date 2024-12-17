@@ -10,23 +10,19 @@ import Utils
 
 import ExpUtils.DataLogger
 
-random.seed(2024)
-torch.manual_seed(2024)
-numpy.random.seed(2024)
-
 class Algorithm:
-    def __init__(self):
-        self.config_filename = '/home/raghav/Research/GECCO25/DMO/config/DMOConfig.yaml'
+    def __init__(self, alg_config_filename, rover_config_filename, data_filename):
+        self.config_filename = alg_config_filename
         self._read_config()
 
-        self.data_filename = '/home/raghav/Research/GECCO25/DMO/experiments/data/testing.csv'
+        self.data_filename = data_filename
         self.data_logger = ExpUtils.DataLogger.DataLogger(data_fields=['gen',
                                                                        'id',
                                                                        'fitness',
                                                                        'trajectory'],
                                                                        target_filename=self.data_filename)
 
-        self.interface = MORoverInterface.MORoverInterface('/home/raghav/Research/GECCO25/DMO/config/MORoverEnvConfig.yaml')
+        self.interface = MORoverInterface.MORoverInterface(rover_config_filename)
         self.team_size = self.interface.get_team_size()
         self.num_objs = self.interface.get_num_objs()
 
