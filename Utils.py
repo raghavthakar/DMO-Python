@@ -55,7 +55,7 @@ class Utils:
 
         return y1, y2
 
-    def crossover(self, parent1: Individual, parent2: Individual):
+    def crossover(self, parent1: Individual, parent2: Individual, glob_id_counter: int):
         """
         Perform a crossover between 2 Individuals.
 
@@ -79,5 +79,5 @@ class Utils:
             o1, o2 = self.SBX(p1, p2) # Get two offspring policies
             joint_policy1.append(o1)
             joint_policy2.append(o2)
-        
-        return Individual(joint_policy=joint_policy1, num_objs=self.num_objs), Individual(joint_policy=joint_policy2, num_objs=self.num_objs)
+
+        return Individual(joint_policy=joint_policy1, num_objs=self.num_objs, id=glob_id_counter+1), Individual(joint_policy=joint_policy2, num_objs=self.num_objs, id=glob_id_counter+2)

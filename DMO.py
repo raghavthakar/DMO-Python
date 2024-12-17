@@ -27,7 +27,7 @@ class DMO(Algorithm.Algorithm):
             
             # Add this individual's data to the logger
             self.data_logger.add_data(key='gen', value=gen)
-            self.data_logger.add_data(key='id', value=-1)
+            self.data_logger.add_data(key='id', value=ind.id)
             self.data_logger.add_data(key='fitness', value=ind.fitness)
             self.data_logger.add_data(key='trajectory', value=ind.trajectory)
             self.data_logger.write_data()
@@ -102,12 +102,14 @@ class DMO(Algorithm.Algorithm):
                                             id=-1, 
                                             num_objs=self.num_objs)
             # Get the offsprings by crossing over these Individuals
-            offspring1, offspring2 = self.utils.crossover(parent1, parent2)
+            offspring1, offspring2 = self.utils.crossover(parent1, parent2, self.glob_ind_counter)
             # Mutate the offsprings by adding noise
             offspring1.mutate()
             offspring2.mutate()
             # Add to the offspring set
             offspring_set.extend([offspring1, offspring2])
+            # Update the global id counter
+            self.glob_ind_counter += 2
         
         # Set the population to the parent + offspring set
         self.pop = parent_set
