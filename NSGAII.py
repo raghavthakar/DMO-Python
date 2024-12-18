@@ -52,9 +52,9 @@ class NSGAII(Algorithm.Algorithm):
         # Fill up the offspring set to the pop_size via offspring-creation
         while len(parent_set) + len(offspring_set) < self.pop_size:
             # Select 2 parents via binary tournament
-            idx1, idx2 = random.sample(range(len(sorted_indices)), 2) # Sample two indices from the list
+            idx1, idx2 = random.sample(range(len(parent_indices)), 2) # Sample two indices from the list
             parent1 = parent_set[min(idx1, idx2)] # choose the lower (more fit) option
-            idx1, idx2 = random.sample(range(len(sorted_indices)), 2) # Sample two indices from the list
+            idx1, idx2 = random.sample(range(len(parent_indices)), 2) # Sample two indices from the list
             parent2 = parent_set[min(idx1, idx2)] # choose the lower (more fit) option
             # Get the offsprings by crossing over these Individuals
             offspring1, offspring2 = self.utils.crossover(parent1, parent2, self.glob_ind_counter)

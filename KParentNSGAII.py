@@ -57,9 +57,9 @@ class KParentNSGAII(Algorithm.Algorithm):
             # Two parents per policy in the offspring
             for policy_idx in range(self.team_size):
                 # Select 2 parents via binary tournament
-                idx1, idx2 = random.sample(range(len(sorted_indices)), 2) # Sample two indices from the list
+                idx1, idx2 = random.sample(range(len(parent_indices)), 2) # Sample two indices from the list
                 policy_lvl_parent1 = parent_set[min(idx1, idx2)] # choose the lower (more fit) option
-                idx1, idx2 = random.sample(range(len(sorted_indices)), 2) # Sample two indices from the list
+                idx1, idx2 = random.sample(range(len(parent_indices)), 2) # Sample two indices from the list
                 policy_lvl_parent2 = parent_set[min(idx1, idx2)] # choose the lower (more fit) option
                 # Copy the policy at this index to the parent policies
                 parent_jp1.append(policy_lvl_parent1.joint_policy[policy_idx])
