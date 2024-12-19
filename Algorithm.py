@@ -10,7 +10,7 @@ import Utils
 
 import ExpUtils.DataLogger
 
-class Algorithm:
+class CentralisedAlgorithm:
     def __init__(self, alg_config_filename, rover_config_filename, data_filename):
         self.config_filename = alg_config_filename
         self._read_config()

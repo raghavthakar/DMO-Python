@@ -5,7 +5,7 @@ import pygmo as pg
 import Algorithm
 import Individual
 
-class DMO(Algorithm.Algorithm):
+class DMO(Algorithm.CentralisedAlgorithm):
     def __init__(self, alg_config_filename, rover_config_filename, data_filename):
         super().__init__(alg_config_filename, rover_config_filename, data_filename)
 

@@ -3,7 +3,7 @@ import pygmo as pg
 
 import Algorithm
 
-class NSGAII(Algorithm.Algorithm):
+class NSGAII(Algorithm.CentralisedAlgorithm):
     def __init__(self, alg_config_filename, rover_config_filename, data_filename):
         super().__init__(alg_config_filename, rover_config_filename, data_filename)
 
