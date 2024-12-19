@@ -150,7 +150,7 @@ class MORoverEnv:
         Returns a zero reward vector if reward mode is Final and the timestep is not ep_length - 1.
         """
         # Initialize the reward vector as a dictionary with objectives as keys and zeroed cumulative rewards
-        reward_vector = {poi.obj: 0 for poi in self.pois}
+        reward_vector = {obj: 0 for obj in range(self.num_objs)}
 
         # check the reward mode. only compute reward if the timestep allows it.
         if self.global_reward_mode == "Aggregated" or (self.global_reward_mode == "Final" and timestep == self.ep_length - 1):
