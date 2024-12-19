@@ -33,7 +33,7 @@ class NSGAII_D(Algorithm.CoevolutionaryAlgorithm):
             # Add this evaluation's data to the logger
             self.data_logger.add_data(key='gen', value=gen)
             self.data_logger.add_data(key='id', value=self.glob_eval_counter)
-            self.data_logger.add_data(key='fitness', value=fitness_dict)
+            self.data_logger.add_data(key='fitness', value=[fitness_dict[f] for f in fitness_dict])
             self.data_logger.add_data(key='trajectory', value=trajectory)
             self.data_logger.write_data()
 
@@ -45,9 +45,8 @@ class NSGAII_D(Algorithm.CoevolutionaryAlgorithm):
                 for f in cf_fitness_dict:
                     cf_fitness_dict[f] = -cf_fitness_dict[f] # NOTE: The fitness sign is flipped to match Pygmo convention
                 # Difference evalutions per-objective for this policy
-                policy_d_vals = []
-                for tf, cf in zip(fitness_dict, cf_fitness_dict):
-                    policy_d_vals.append(fitness_dict[tf]-cf_fitness_dict[cf]) # performance with it - performance without it
+                objectives = sorted(fitness_dict.keys())
+                policy_d_vals = [fitness_dict[o] - cf_fitness_dict[o] for o in objectives]
                 # Append to corresponding subpop d values
                 difference_evals[p_idx].append(policy_d_vals)
                 
@@ -55,10 +54,13 @@ class NSGAII_D(Algorithm.CoevolutionaryAlgorithm):
         for subpop_idx, subpop_d_vals in enumerate(difference_evals):
             sorted_indices = pg.sort_population_mo(points=[d_vals for d_vals in subpop_d_vals])
             # Arrange the policies in subpop according to this sorted order
-            self.pop[subpop_idx] = [policy for _, policy in sorted(zip(sorted_indices, self.pop[subpop_idx]), key=lambda x: x[0])]
+            sorted_subpop = []
+            for policy_idx in sorted_indices:
+                sorted_subpop.append(self.pop[subpop_idx][policy_idx])
+            sorted_subpop = sorted_subpop[: self.pop_size // 2]
             # Keep only the top half of each subpop
-            self.pop[subpop_idx] = self.pop[subpop_idx][: self.pop_size // 2]
-        
+            self.pop[subpop_idx] = sorted_subpop
+
         # Offspring creation in each subpop
         for subpop_idx, subpop in enumerate(self.pop):
             offspring_set = []
