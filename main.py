@@ -8,13 +8,14 @@ import shutil # for file management
 import NSGAII
 import KParentNSGAII
 import DMO
+import NSGAII_D
 
 if __name__ == '__main__':
     assert len(sys.argv) == 6, "Correct usage: python alg_name data_dirpath alg_config env_config seed"
    
     # Process the command line args
     alg_name = sys.argv[1]
-    assert alg_name in ['nsga2', 'kpnsga2', 'dmo'], "Unrecognised alg_name"
+    assert alg_name in ['nsga2', 'kpnsga2', 'dmo', 'nsga2+d'], "Unrecognised alg_name"
     data_dir = sys.argv[2]
     data_dir = data_dir+'/' if data_dir[-1]!='/' else data_dir # Add a directory '/' at the end
     src_alg_config_filename = sys.argv[3]
@@ -50,6 +51,10 @@ if __name__ == '__main__':
         alg = DMO.DMO(alg_config_filename=dest_alg_config_filename,
                       data_filename=data_filename,
                       rover_config_filename=dest_env_config_filename)
+    elif alg_name == 'nsga2+d':
+        alg = NSGAII_D.NSGAII_D(alg_config_filename=dest_alg_config_filename,
+                                data_filename=data_filename,
+                                rover_config_filename=dest_env_config_filename)
     
     # Run the algorithm
     for gen in range(alg.num_gens):
