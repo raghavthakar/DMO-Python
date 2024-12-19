@@ -116,7 +116,7 @@ class MORoverInterface():
         '''
         Get the number of inputs to the actor network.
         '''
-        return self.config['Agents']['num_sensors'][0] * 2 + len(self.rover_env.dimensions)*int(self.rover_env.include_location_in_obs)
+        return self.config['Agents']['num_sensors'][0] * (self.get_num_objs()+1) + len(self.rover_env.dimensions)*int(self.rover_env.include_location_in_obs)
     
     def get_action_size(self):
         '''

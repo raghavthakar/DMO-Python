@@ -320,8 +320,8 @@ class MORoverEnv:
                 # 2D environment
                 num_cones = num_sensors
                 cone_angle = 360.0 / num_cones
-                poi_counts = [0] * num_cones
-                poi_densities = [0] * num_cones
+                poi_counts = [0] * num_cones * self.num_objs # distinct poi observations for each objective
+                poi_densities = [0] * num_cones * self.num_objs # distinct poi observations for each objective
                 agent_counts = [0] * num_cones
                 agent_densities = [0] * num_cones
 
@@ -334,8 +334,8 @@ class MORoverEnv:
                     if distance <= obs_radius:
                         angle = math.degrees(math.atan2(dy, dx)) % 360
                         cone_index = int(angle // cone_angle)
-                        poi_counts[cone_index] += 1
-                        poi_densities[cone_index] += math.exp(-distance/self.poi_obs_temp)
+                        poi_counts[poi.obj*num_cones + cone_index] += 1
+                        poi_densities[poi.obj*num_cones + cone_index] += math.exp(-distance/self.poi_obs_temp)
 
                 # Count other agents within observation radius and cones
                 for other_idx, other_pos in enumerate(rover_locations):
