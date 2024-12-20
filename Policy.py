@@ -52,7 +52,7 @@ class Policy(nn.Module):
             nn.init.uniform_(layer.weight, -self.weight_init_lim, self.weight_init_lim)
             nn.init.uniform_(layer.bias, -self.bias_init_lim, self.bias_init_lim)
 
-    def forward(self, x):
+    def forward(self, x, final_activation="tanh"):
         """
         Forward pass through the network.
 
@@ -67,7 +67,10 @@ class Policy(nn.Module):
             if i < len(self.layers) - 1:
                 x = torch.tanh(x)  # Hidden layers activation
             else:
-                x = torch.tanh(x)  # Output layer activation to constrain outputs to [-1, +1]
+                if final_activation=="tanh":
+                    x = torch.tanh(x)  # Output layer activation to constrain outputs to [-1, +1]
+                elif final_activation=="softmax":
+                    x = torch.softmax(x, dim=0) # Output layer activation to get probability distribution over actions
         return x
 
     def mutate(self):
