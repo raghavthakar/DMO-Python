@@ -1,0 +1,10 @@
+Environment:
+  ep_length: 1  # episode length
+
+  sections:
+    - capacity: 6
+      num_type0_agents: 3
+      num_type1_agents: 3
+    - capacity: 6
+      num_type0_agents: 3
+      num_type1_agents: 3
