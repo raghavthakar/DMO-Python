@@ -6,8 +6,8 @@ import Algorithm
 import Individual
 
 class DMO(Algorithm.CentralisedAlgorithm):
-    def __init__(self, alg_config_filename, rover_config_filename, data_filename):
-        super().__init__(alg_config_filename, rover_config_filename, data_filename)
+    def __init__(self, alg_config_filename, domain_name, rover_config_filename, data_filename):
+        super().__init__(alg_config_filename, domain_name, rover_config_filename, data_filename)
 
     def evolve(self, gen=0):
         """Evolve the population using NSGA-II."""
