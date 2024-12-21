@@ -5,6 +5,7 @@ import torch
 import numpy
 
 import MORoverInterface
+import MOBeachInterface
 import Policy
 import Individual
 import Utils
@@ -12,7 +13,7 @@ import Utils
 import ExpUtils.DataLogger
 
 class CentralisedAlgorithm:
-    def __init__(self, alg_config_filename, rover_config_filename, data_filename):
+    def __init__(self, alg_config_filename, domain_name="rover", domain_config_filename=None, data_filename=None):
         self.config_filename = alg_config_filename
         self._read_config()
 
@@ -23,7 +24,11 @@ class CentralisedAlgorithm:
                                                                        'trajectory'],
                                                                        target_filename=self.data_filename)
 
-        self.interface = MORoverInterface.MORoverInterface(rover_config_filename)
+        if domain_name == "rover":
+            self.interface = MORoverInterface.MORoverInterface(domain_config_filename)
+        elif domain_name == "beach":
+            self.interface = MOBeachInterface.MOBeachInterface(domain_config_filename)
+        
         self.team_size = self.interface.get_team_size()
         self.num_objs = self.interface.get_num_objs()
 
@@ -59,7 +64,7 @@ class CentralisedAlgorithm:
         self.num_gens = self.config_data['Evolutionary']['num_gens']
 
 class CoevolutionaryAlgorithm:
-    def __init__(self, alg_config_filename, rover_config_filename, data_filename):
+    def __init__(self, alg_config_filename, domain_name="rover", domain_config_filename=None, data_filename=None):
         self.config_filename = alg_config_filename
         self._read_config()
 
@@ -70,7 +75,11 @@ class CoevolutionaryAlgorithm:
                                                                        'trajectory'],
                                                                        target_filename=self.data_filename)
 
-        self.interface = MORoverInterface.MORoverInterface(rover_config_filename)
+        if domain_name == "rover":
+            self.interface = MORoverInterface.MORoverInterface(domain_config_filename)
+        elif domain_name == "beach":
+            self.interface = MOBeachInterface.MOBeachInterface(domain_config_filename)
+        
         self.team_size = self.interface.get_team_size()
         self.num_objs = self.interface.get_num_objs()
 
