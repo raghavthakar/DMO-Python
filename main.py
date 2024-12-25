@@ -28,7 +28,7 @@ if __name__ == '__main__':
     datetime_now_string = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
     # Save data filename
-    data_filename = data_dir+alg_name+'_'+datetime_now_string+'_savedata.csv'
+    data_filename = data_dir+alg_name+'_'+domain_name+'_'+datetime_now_string+'_savedata.csv'
     # Create copy of configs at save data location
     dest_alg_config_filename = data_dir+alg_name+'_'+domain_name+'_'+datetime_now_string+'_algconfig.yaml'
     shutil.copyfile(src_alg_config_filename, dest_alg_config_filename)
