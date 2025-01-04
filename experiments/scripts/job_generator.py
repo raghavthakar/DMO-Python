@@ -1,7 +1,7 @@
 import os
 
 def generate_bash_scripts(script_num, time, label, alg, env, data_dir, alg_config, env_config, seed):
-    script_path = f"/nfs/stak/users/thakarr/hpc-share/GECCO25/DMO-Python/experiments/scripts/job_scripts/{env}_{label}_{alg}_{script_num}.sh"
+    script_path = f"/nfs/stak/users/thakarr/hpc-share/GECCO25/DMO-Python/experiments/scripts/job_scripts/{env}_{label}_{alg}_{seed}.sh"
     
     with open(script_path, 'w') as file:
         file.write("#!/bin/bash\n")
