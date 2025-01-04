@@ -23,17 +23,18 @@ if __name__ == '__main__':
     src_alg_config_filename = sys.argv[4]
     src_env_config_filename = sys.argv[5]
     seed_val = int(sys.argv[6])
+    seed_val_str = str(seed_val)
     label = sys.argv[7]
 
     # Datetime for file naming
     datetime_now_string = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
     # Save data filename
-    data_filename = data_dir+alg_name+'_'+domain_name+'_'+seed_val+'_'+label+'_'+datetime_now_string+'_savedata.csv'
+    data_filename = data_dir+alg_name+'_'+domain_name+'_'+seed_val_str+'_'+label+'_'+datetime_now_string+'_savedata.csv'
     # Create copy of configs at save data location
-    dest_alg_config_filename = data_dir+alg_name+'_'+domain_name+'_'+seed_val+'_'+label+'_'+datetime_now_string+'_algconfig.yaml'
+    dest_alg_config_filename = data_dir+alg_name+'_'+domain_name+'_'+seed_val_str+'_'+label+'_'+datetime_now_string+'_algconfig.yaml'
     shutil.copyfile(src_alg_config_filename, dest_alg_config_filename)
-    dest_env_config_filename = data_dir+alg_name+'_'+domain_name+'_'+seed_val+'_'+label+'_'+datetime_now_string+'_envconfig.yaml'
+    dest_env_config_filename = data_dir+alg_name+'_'+domain_name+'_'+seed_val_str+'_'+label+'_'+datetime_now_string+'_envconfig.yaml'
     shutil.copyfile(src_env_config_filename, dest_env_config_filename)
 
     # Set the seed value for all libraries
