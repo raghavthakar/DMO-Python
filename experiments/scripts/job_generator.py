@@ -16,7 +16,7 @@ def generate_bash_scripts(script_num, time, label, alg, env, data_dir, alg_confi
         file.write("module load conda\n\n")
         file.write("source activate base\n\n")
         file.write("conda activate /nfs/stak/users/thakarr/hpc-share/GECCO25\n\n")
-        file.write(f'python3 /nfs/stak/users/thakarr/hpc-share/GECCO25/DMO-Python/main.py "{alg}" "{env}" "{data_dir}" "{alg_config}" "{env_config}" "{seed}"\n')
+        file.write(f'python3 /nfs/stak/users/thakarr/hpc-share/GECCO25/DMO-Python/main.py "{alg}" "{env}" "{data_dir}" "{alg_config}" "{env_config}" "{seed}" "{label}"\n')
 
     # Make the file executable
     os.chmod(script_path, 0o755)
