@@ -3,6 +3,9 @@ import os
 def generate_bash_scripts(script_num, time, label, alg, env, data_dir, alg_config, env_config, seed):
     script_path = f"/nfs/stak/users/thakarr/hpc-share/GECCO25/DMO-Python/experiments/scripts/job_scripts/{env}_{label}_{alg}_{seed}.sh"
     
+    # Create the directory if it does not exist
+    os.makedirs(os.path.dirname(script_path), exist_ok=True)
+    
     with open(script_path, 'w') as file:
         file.write("#!/bin/bash\n")
         file.write(f"#SBATCH --time={time}\n")
@@ -13,7 +16,7 @@ def generate_bash_scripts(script_num, time, label, alg, env, data_dir, alg_confi
         file.write("module load conda\n\n")
         file.write("source activate base\n\n")
         file.write("conda activate /nfs/stak/users/thakarr/hpc-share/GECCO25\n\n")
-        file.write(f'/nfs/stak/users/thakarr/hpc-share/GECCO25/DMO-Python/main.py "{alg}" "{env}" "{data_dir}" "{alg_config}" "{env_config}" "{seed}"\n')
+        file.write(f'python3 /nfs/stak/users/thakarr/hpc-share/GECCO25/DMO-Python/main.py "{alg}" "{env}" "{data_dir}" "{alg_config}" "{env_config}" "{seed}"\n')
 
     # Make the file executable
     os.chmod(script_path, 0o755)
