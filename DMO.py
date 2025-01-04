@@ -35,19 +35,11 @@ class DMO(Algorithm.CentralisedAlgorithm):
         # Sort the population according to fitness
         sorted_indices = pg.sort_population_mo(points=[ind.fitness for ind in self.pop])
         fitness_tuples = [tuple(ind.fitness) for ind in self.pop]
+
+        # Keep the top half
+        sorted_indices = sorted_indices[:len(sorted_indices)//2]
         
-        # Track unique and duplicate fitnesses
-        seen = set()
-        unique_indices = []
-        duplicates = []
-        # Separate population into unique and duplicate fitnesses
-        for idx in sorted_indices:
-            ft = fitness_tuples[idx]
-            (unique_indices if ft not in seen else duplicates).append(idx)
-            seen.add(ft)
-        # Pick the top half, but prioritise unique solutions then duplicates
-        parent_indices = (unique_indices + duplicates)[: self.pop_size // 2]
-        parent_set = [self.pop[i] for i in parent_indices]
+        parent_set = [self.pop[i] for i in sorted_indices]
         # Create empty offpring set
         offspring_set = []
 
