@@ -28,7 +28,8 @@ class KParentNSGAII(Algorithm.CentralisedAlgorithm):
             self.data_logger.add_data(key='gen', value=gen)
             self.data_logger.add_data(key='id', value=ind.id)
             self.data_logger.add_data(key='fitness', value=ind.fitness)
-            self.data_logger.add_data(key='trajectory', value=ind.trajectory)
+            if gen == self.num_gens - 1:
+                self.data_logger.add_data(key='trajectory', value=ind.trajectory)
             self.data_logger.write_data()
         
         # Sort the population according to fitness

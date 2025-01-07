@@ -34,7 +34,8 @@ class NSGAII_D(Algorithm.CoevolutionaryAlgorithm):
             self.data_logger.add_data(key='gen', value=gen)
             self.data_logger.add_data(key='id', value=self.glob_eval_counter)
             self.data_logger.add_data(key='fitness', value=[fitness_dict[f] for f in fitness_dict])
-            self.data_logger.add_data(key='trajectory', value=trajectory)
+            if gen == self.num_gens - 1:
+                self.data_logger.add_data(key='trajectory', value=trajectory)
             self.data_logger.write_data()
 
             # Counterfactual eval of each policy in this team policy
