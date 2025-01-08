@@ -104,7 +104,7 @@ class MORoverInterface():
 
         self.rover_env.reset() # reset the rover env
 
-        cumulative_global_reward = {}  # Initialize cumulative global reward
+        cumulative_global_reward = {obj: 0 for obj in range(self.rover_env.num_objs)} # Initialize cumulative global reward
         for t, agent_locations in enumerate(parsed_trajectory):
             global_reward = self.rover_env.get_global_rewards(rov_locations=agent_locations, timestep=t)
             cumulative_global_reward = self._keywise_sum(cumulative_global_reward, global_reward)
