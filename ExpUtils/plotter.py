@@ -15,28 +15,16 @@ from scipy.stats import sem
 # ----------------------------
 methods_data = {
     "nsga2": [
-        "~/gecco_data/reduced_nsga2_rover_2024_coord16_2025-01-04_15-19-56_savedata.csv",
-        "~/gecco_data/reduced_nsga2_rover_2025_coord16_2025-01-04_15-20-59_savedata.csv",
-        "~/gecco_data/reduced_nsga2_rover_2026_coord16_2025-01-04_15-21-56_savedata.csv",
-        "~/gecco_data/reduced_nsga2_rover_2027_coord16_2025-01-04_15-22-57_savedata.csv",
+        "/home/raghav/Research/GECCO25/DMO/experiments/data/nsga2_beach_2024_beach50_2025-01-06_20-55-53_savedata.csv",
     ],
     "dmo": [
-        "~/gecco_data/reduced_dmo_rover_2024_coord16_2025-01-04_15-11-57_savedata.csv",
-        "~/gecco_data/reduced_dmo_rover_2025_coord16_2025-01-04_15-12-58_savedata.csv",
-        "~/gecco_data/reduced_dmo_rover_2026_coord16_2025-01-04_15-13-55_savedata.csv",
-        "~/gecco_data/reduced_dmo_rover_2027_coord16_2025-01-04_15-14-55_savedata.csv",
+        "/home/raghav/Research/GECCO25/DMO/experiments/data/dmo_beach_2024_beach50_2025-01-06_20-22-00_savedata.csv",
     ],
     "kpnsga2": [
-        "~/gecco_data/reduced_kpnsga2_rover_2024_coord16_2025-01-04_15-15-55_savedata.csv",
-        "~/gecco_data/reduced_kpnsga2_rover_2025_coord16_2025-01-04_15-16-58_savedata.csv",
-        "~/gecco_data/reduced_kpnsga2_rover_2026_coord16_2025-01-04_15-17-55_savedata.csv",
-        "~/gecco_data/reduced_kpnsga2_rover_2027_coord16_2025-01-04_15-18-56_savedata.csv",
+        "/home/raghav/Research/GECCO25/DMO/experiments/data/kpnsga2_beach_2024_beach50_2025-01-06_22-15-26_savedata.csv",
     ],
     "nsga2+d": [
-        "~/gecco_data/reduced_nsga2+d_rover_2024_coord16_2025-01-04_15-23-57_savedata.csv",
-        "~/gecco_data/reduced_nsga2+d_rover_2025_coord16_2025-01-04_15-25-00_savedata.csv",
-        "~/gecco_data/reduced_nsga2+d_rover_2026_coord16_2025-01-04_15-27-01_savedata.csv",
-        "~/gecco_data/reduced_nsga2+d_rover_2027_coord16_2025-01-04_15-27-58_savedata.csv",
+        "/home/raghav/Research/GECCO25/DMO/experiments/data/nsga2+d_beach_2024_beach50_2025-01-06_23-03-35_savedata.csv",
     ],
     # Add more methods as needed
 }
@@ -44,11 +32,24 @@ methods_data = {
 # ----------------------------
 # 2. Known Pareto Front
 # ----------------------------
-pareto_front = np.array([[-4, -4,  0],
-                         [-3, -4, -1],
-                         [-2, -4, -2],
-                         [-1, -4, -3],
-                         [ 0, -4, -4]])
+# pareto_front = np.array([[-4, -4,  0],
+#                          [-3, -4, -1],
+#                          [-2, -4, -2],
+#                          [-1, -4, -3],
+#                          [ 0, -4, -4]])
+
+pareto_front = np.array([[-4.107372, -0.452381],
+                         [-4.134956, -0.450000],
+                         [-4.162565, -0.447368],
+                         [-4.190221, -0.444444],
+                         [-4.217961, -0.441176],
+                         [-4.239412, -0.415315],
+                         [-4.267104, -0.412381],
+                         [-4.288620, -0.385965],
+                         [-4.316275, -0.383333],
+                         [-4.337837, -0.356410],
+                         [-4.365466, -0.354054],
+                         [-4.414673, -0.324561]])
 
 igd_indicator = IGD(pareto_front)
 
