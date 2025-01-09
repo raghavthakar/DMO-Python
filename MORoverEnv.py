@@ -348,6 +348,11 @@ class MORoverEnv:
                     if distance <= obs_radius:
                         angle = math.degrees(math.atan2(dy, dx)) % 360
                         cone_index = int(angle // cone_angle)
+
+                        # Clamp the cone_index so we never go out of range
+                        if cone_index == num_cones:
+                            cone_index = num_cones - 1 # avoid the floating point edge case errors of atan2
+                        
                         agent_counts[cone_index] += 1
                         agent_densities[cone_index] += math.exp(-distance/self.agent_obs_temp)
                 
