@@ -110,7 +110,7 @@ Environment:
       radius: 0.25
       coupling: 1
       obs_window: [0, 100]
-      reward: 1
+      reward: 0.5
       repeat: True
 
 Agents:
