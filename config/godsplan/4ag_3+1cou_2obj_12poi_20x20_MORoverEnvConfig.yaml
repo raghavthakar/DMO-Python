@@ -22,7 +22,7 @@ Environment:
       radius: 1
       coupling: 1
       obs_window: [0, 100]
-      reward: 0.5
+      reward: 1
       repeat: True
 
     - obj: 0
@@ -62,7 +62,7 @@ Environment:
       radius: 0.25
       coupling: 1
       obs_window: [0, 100]
-      reward: 1
+      reward: 0.5
       repeat: True
 
     - obj: 1
@@ -70,7 +70,7 @@ Environment:
       radius: 1
       coupling: 1
       obs_window: [0, 100]
-      reward: 0.5
+      reward: 1
       repeat: True
 
     - obj: 1
