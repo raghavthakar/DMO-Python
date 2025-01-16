@@ -20,9 +20,9 @@ Environment:
     - obj: 0
       location: [3, 3]
       radius: 1
-      coupling: 1
+      coupling: 3
       obs_window: [0, 100]
-      reward: 1
+      reward: 1.5
       repeat: True
 
     - obj: 0
@@ -62,15 +62,15 @@ Environment:
       radius: 0.25
       coupling: 1
       obs_window: [0, 100]
-      reward: 0.5
+      reward: 0.25
       repeat: True
 
     - obj: 1
       location: [5, 5]
       radius: 1
-      coupling: 1
+      coupling: 3
       obs_window: [0, 100]
-      reward: 1
+      reward: 1.5
       repeat: True
 
     - obj: 1
@@ -110,7 +110,7 @@ Environment:
       radius: 0.25
       coupling: 1
       obs_window: [0, 100]
-      reward: 0.5
+      reward: 0.25
       repeat: True
 
 Agents:
