@@ -11,7 +11,7 @@ import DMO
 import NSGAII_D
 
 if __name__ == '__main__':
-    assert len(sys.argv) == 8, "Correct usage: python alg_name domain_name data_dirpath alg_config env_config seed label"
+    assert len(sys.argv) == 9, "Correct usage: python alg_name domain_name data_dirpath alg_config env_config seed label traj_write_freq"
    
     # Process the command line args
     alg_name = sys.argv[1]
@@ -25,6 +25,7 @@ if __name__ == '__main__':
     seed_val = int(sys.argv[6])
     seed_val_str = str(seed_val)
     label = sys.argv[7]
+    traj_write_freq = int(sys.argv[8])
 
     # Datetime for file naming
     datetime_now_string = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -66,4 +67,4 @@ if __name__ == '__main__':
     
     # Run the algorithm
     for gen in range(alg.num_gens):
-        alg.evolve(gen=gen)
+        alg.evolve(gen=gen, traj_write_freq=traj_write_freq)
