@@ -8,7 +8,7 @@ class KParentNSGAII(Algorithm.CentralisedAlgorithm):
     def __init__(self, alg_config_filename, domain_name, rover_config_filename, data_filename):
         super().__init__(alg_config_filename, domain_name, rover_config_filename, data_filename)
     
-    def evolve(self, gen=0):
+    def evolve(self, gen=0, traj_write_freq=100):
         """Evolve the population using NSGA-II."""
         # Perform rollout and assign fitness to each individual
         for ind in self.pop:
@@ -28,8 +28,10 @@ class KParentNSGAII(Algorithm.CentralisedAlgorithm):
             self.data_logger.add_data(key='gen', value=gen)
             self.data_logger.add_data(key='id', value=ind.id)
             self.data_logger.add_data(key='fitness', value=ind.fitness)
-            if gen == self.num_gens - 1:
+            if gen == self.num_gens - 1 or gen % traj_write_freq == 0:
                 self.data_logger.add_data(key='trajectory', value=ind.trajectory)
+            else:
+                self.data_logger.add_data(key='trajectory', value=None)
             self.data_logger.write_data()
         
         # Sort the population according to fitness
