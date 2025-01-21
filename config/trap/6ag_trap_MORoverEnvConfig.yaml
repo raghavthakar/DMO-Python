@@ -84,6 +84,6 @@ Environment:
 Agents:
   # Four rovers (the first dimension's length => 9 agents)
   starting_locs: [[2, 2], [2, 18], [18, 2], [18, 18], [2, 10], [18, 10]]
-  num_sensors: [4, 4, 4, 4, 4, 4, 4, 4]
-  observation_radii: [5, 5, 5, 5, 5, 5, 5, 5]       # They can "see" POIs up to distance 5
-  max_step_sizes: [1, 1, 1, 1, 1, 1, 1, 1]   # Slows movement, requiring careful planning
+  num_sensors: [4, 4, 4, 4, 4, 4]
+  observation_radii: [5, 5, 5, 5, 5, 5]       # They can "see" POIs up to distance 5
+  max_step_sizes: [1, 1, 1, 1, 1, 1]   # Slows movement, requiring careful planning
